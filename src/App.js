@@ -1,23 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import './App.css';
 import SiteNavBar from './SiteNavBar.js';
+import Main from './Main.js';
 import Footer from './Footer.js';
 
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <SiteNavBar />
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Footer />
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <SiteNavBar />
+    <Main />
+    <Footer />
+  </div>
+);
 
 export default App;

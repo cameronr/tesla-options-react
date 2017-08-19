@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom'
 
 class SiteNavBar extends Component {
   render() {
@@ -7,17 +9,23 @@ class SiteNavBar extends Component {
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">Tesla Options Decoder</a>
+            <Link to="/">Tesla Options Decoder</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <NavItem eventKey={1} href="#">Check your options</NavItem>
-            <NavItem eventKey={2} href="#">Show all possible options</NavItem>
+            <IndexLinkContainer to="/">
+              <NavItem eventKey={1}>Check your options</NavItem>
+            </IndexLinkContainer>
+            <LinkContainer to="/all-options">
+              <NavItem eventKey={2}>Show all possible options</NavItem>
+            </LinkContainer>
           </Nav>
           <Nav pullRight>
-            <NavItem eventKey={1} href="#">About</NavItem>
+            <LinkContainer to="/about">
+              <NavItem eventKey={1}>About</NavItem>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

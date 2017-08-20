@@ -1,16 +1,23 @@
-export const addOptionCode = (code, description) => {
+export const addOptionCode = (code, object) => {
   return {
     type: 'ADD_OPTION_CODE',
     code: code,
-    description: description
+    object: object
   }
 }
 
-export const loadOptionCodes = () => {
+export const setVehicleData = (text) => {
   return {
-    type:'LOAD_OPTION_CODES'
+    type: 'SET_VEHICLE_DATA',
+    text
   }
 }
+
+// export const loadOptionCodes = () => {
+//   return {
+//     type:'LOAD_OPTION_CODES'
+//   }
+// }
 
 
 

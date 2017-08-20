@@ -1,8 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Button, FormGroup, FormControl, HelpBlock, ControlLabel, Popover, OverlayTrigger } from 'react-bootstrap';
 import './Options.css';
-// import OptionCodeList from './OptionCodeList.js';
 import MatchingOptionCodes from './containers/MatchingOptionCodes.js'
+import { setVehicleData } from './actions'
+
 
 const popoverClick = (
   <Popover id="popover-trigger-click">
@@ -33,8 +35,27 @@ function FieldGroup({ id, label, help, ...props }) {
 
 class Options extends React.Component {
 
+   constructor(props) {
+    super(props);
+    this.state = {
+      vehicleData: ''
+    };
+  }
+
+  handleChange = (event) => {
+    this.setState({vehicleData: event.target.value});
+  }
+
   onClick = () => {
-    console.log("clicked");
+    this.props.dispatch(setVehicleData(this.state.vehicleData));
+  }
+
+  _handleKeyPress = (e) => {
+    // prevent submission on form eneter
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      this.onClick();
+    }
   }
 
   render() {
@@ -47,9 +68,11 @@ class Options extends React.Component {
               id="optionsLink"
               type="text"
               label={LinkLabel()}
+              onChange={this.handleChange}
+              onKeyPress={this._handleKeyPress}
               placeholder="https://my.teslamotors.com/mytesla/pdf/view-design-pdf?..."
             />
-            <Button type="submit" bsStyle="primary" bsSize="large" onClick={this.onClick}>
+            <Button bsStyle="primary" bsSize="large" onClick={this.onClick}>
               Submit
             </Button>
           </form>
@@ -60,5 +83,7 @@ class Options extends React.Component {
   }
 }
 
-export default Options;
+
+
+export default connect()(Options)
 

@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 
-const OptionCode = ({ code, description }) => (
-  <li>{code}: {description}</li>
+const OptionCode = ({ code, object }) => (
+  <dt>{code}</dt>
 )
 
 OptionCode.propTypes = {
   code: PropTypes.string.isRequired,
-  description: PropTypes.string
+  object: PropTypes.object.isRequired
 }
 
 export default OptionCode

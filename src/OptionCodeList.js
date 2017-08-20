@@ -2,19 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import OptionCode from './OptionCode.js'
 
+// from https://stackoverflow.com/questions/35770253/returning-paired-elements-in-react-jsx
 const OptionCodeList = ({ optionCodes }) => (
-  <ul>
-    {optionCodes.map(optionCode => (
-      <OptionCode key={optionCode.code} {...optionCode} />
-    ))}
-  </ul>
+  <dl className="OptionCodeList dl-horizontal">
+    {Object.keys(optionCodes).reduce((acc, key, idx) => {
+      return acc.concat([
+          <dt key={`def-${idx}`}>{key}</dt>,
+          <dd key={`term-${idx}`}>{optionCodes[key]['name']}</dd>
+      ]);
+    }, [])}
+  </dl>
 )
 
 OptionCodeList.propTypes = {
-  optionCodes: PropTypes.arrayOf(
+  optionCodes: PropTypes.objectOf(
     PropTypes.shape({
-      code: PropTypes.string.isRequired,
-      description: PropTypes.string
+      name: PropTypes.string
     }).isRequired
   ).isRequired
 }

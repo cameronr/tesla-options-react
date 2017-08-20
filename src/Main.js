@@ -5,13 +5,13 @@ import AllOptions from './AllOptions.js';
 import About from './About.js';
 
 const Main = () => (
-  <main>
+  <div className="container">
     <Switch>
       <Route exact path='/' component={Options}/>
       <Route path='/all-options' component={AllOptions}/>
       <Route path='/about' component={About}/>
     </Switch>
-  </main>
+  </div>
 );
 
 export default Main;

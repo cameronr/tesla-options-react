@@ -17,15 +17,16 @@ class OptionValue extends React.Component {
 
   render() {
     let name = "";
-    if (this.props.option['description'] && (this.props.option['description'] != this.props.option['name'])) {
-      name = <Button bsStyle="link" onClick={this.onClick}>{this.props.option['name']}</Button>
+    let option = this.props.option;
+    if (option['description'] && (option['description'] !== option['name'])) {
+      name = <Button bsStyle="link" onClick={this.onClick}>{option['name']}</Button>
     } else {
-      name = this.props.option['name']
+      name = option['name']
     }
 
     let description = "";
     if (this.state.expanded) {
-      let data = {__html: this.props.option['description']};
+      let data = {__html: option['description']};
 
       description = <div dangerouslySetInnerHTML={data} />
     }

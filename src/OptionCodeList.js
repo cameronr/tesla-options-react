@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import OptionCode from './OptionCode.js'
 import './OptionCodeList.css'
+import OptionValue from './OptionValue.js'
 
 // from https://stackoverflow.com/questions/35770253/returning-paired-elements-in-react-jsx
 const OptionCodeList = ({ optionCodes }) => (
@@ -9,7 +9,7 @@ const OptionCodeList = ({ optionCodes }) => (
     {Object.keys(optionCodes).reduce((acc, key, idx) => {
       return acc.concat([
           <dt key={`def-${idx}`}>{key}</dt>,
-          <dd key={`term-${idx}`}>{optionCodes[key]['name']}</dd>
+          <OptionValue key={`term-${idx}`} option={optionCodes[key]} />
       ]);
     }, [])}
   </dl>

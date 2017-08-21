@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux'
+import URL from 'url-parse'
+
 
 const optionCodes = (state = {}, action) => {
 
@@ -15,21 +17,20 @@ const optionCodes = (state = {}, action) => {
 const vehicleData = (state = [], action) => {
   switch (action.type) {
     case 'SET_VEHICLE_DATA':
-      let data = action.text.split("options");
       let options = "";
-
-      if (data.length >= 2) {
-        // handle case where full URL is posted
-        let url = data[1].split("=");
-        options = url[1].split("&");
-        options = options[0];
+      if (action.text.indexOf('?') !== -1) {
+        let url = new URL(action.text, null, true);
+        if (url.query.hasOwnProperty('options')) {
+          // ?options=AF02,...
+          options = url.query['options'];
+        } else if (url.query) {
+          //?AF02,...
+          options = Object.keys(url.query)[0];
+        }
       } else {
-        // handle just the options string being posted
-        options = data[0]
-
+        //AF02...
+        options = action.text;
       }
-      // var commaregex = new RegExp('\%2C', 'g');
-      // myoptions = myoptions.replace(commaregex, ',');
       return options.split(",");
     default:
       return state

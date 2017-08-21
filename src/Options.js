@@ -43,7 +43,7 @@ class Options extends React.Component {
   }
 
   handleChange = (event) => {
-    this.setState({vehicleData: event.target.value});
+    this.setState({'vehicleData': event.target.value});
   }
 
   onClick = () => {

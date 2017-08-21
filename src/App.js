@@ -7,7 +7,7 @@ import SiteNavBar from './SiteNavBar.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import PropTypes from 'prop-types'
-import { addOptionCode } from './actions'
+import { addOptionCode, setVehicleData } from './actions'
 
 
 function fetchCodes(store) {
@@ -29,6 +29,9 @@ function fetchCodes(store) {
 class App extends React.Component {
   componentDidMount() {
     fetchCodes(this.context.store);
+
+    if (window.location.href.indexOf('?'))
+      this.context.store.dispatch(setVehicleData(window.location.href));
   }
 
   render() {

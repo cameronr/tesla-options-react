@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import OptionCode from './OptionCode.js'
+import './OptionCodeList.css'
 
 // from https://stackoverflow.com/questions/35770253/returning-paired-elements-in-react-jsx
 const OptionCodeList = ({ optionCodes }) => (

@@ -30,7 +30,7 @@ class App extends React.Component {
   componentDidMount() {
     fetchCodes(this.context.store);
 
-    if (window.location.href.indexOf('?'))
+    if (window.location.href.indexOf('?') !== -1)
       this.context.store.dispatch(setVehicleData(window.location.href));
   }
 

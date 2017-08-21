@@ -2,7 +2,7 @@
   "name": "tesla-decoder",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://whaleface.com/tesla-decoder-react",
+  "homepage": "http://tesla.whaleface.com",
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
     "node-sass-chokidar": "0.0.3",

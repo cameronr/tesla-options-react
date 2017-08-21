@@ -14,17 +14,12 @@ function fetchCodes(store) {
   return fetch('pricebook-3.5_MS_US.json')
     .then(response => response.json())
     .then(json => {
-      Object.entries(json['tesla']['configSetPrices']['options']).map(([code, obj]) => {
-        // console.log(code + ": " + obj.name);
-        // console.log(obj);
-        // add code to the object
-        store.dispatch(addOptionCode(code, obj));
-        return null;
-      })
+      let options = json['tesla']['configSetPrices']['options'];
+      for (let key in options) {
+        store.dispatch(addOptionCode(key, options[key]))
+      }
     })
 }
-
-
 
 class App extends React.Component {
   componentDidMount() {

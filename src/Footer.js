@@ -3,7 +3,7 @@ import './Footer.css';
 
 class Footer extends Component {
   render() {
-    var link = <a href="https://github.com/cameronr/tesla-options-decoder">Source available on GitHub</a>;
+    var link = <a href="https://github.com/cameronr/tesla-options-react">Source available on GitHub</a>;
     return (
       <footer className="Footer">
         <div className="container">

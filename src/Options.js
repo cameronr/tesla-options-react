@@ -66,8 +66,6 @@ function extractOptions(vin, text) {
 }
 
 function handleVinCodes(vin, dispachFn) {
-  console.log('handleVinCodes');
-
   // check used first
   fetch('https://tesla.whaleface.com/proxy/used/' + vin + '?redirect=no')
     .then(response => response.text())

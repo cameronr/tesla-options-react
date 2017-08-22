@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
-import striptags from 'striptags';
 
 class OptionValue extends React.Component {
   constructor(props) {
@@ -19,7 +18,7 @@ class OptionValue extends React.Component {
     let name = "";
     let option = this.props.option;
     if (option['description'] && (option['description'] !== option['name'])) {
-      name = <Button bsStyle="link" onClick={this.onClick}>{striptags(option['name'])}</Button>
+      name = <Button bsStyle="link" onClick={this.onClick}>{option['name'].replace(/<\/?[^>]+(>|$)/g, "")}</Button>
     } else {
       name = option['name']
     }

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
+import striptags from 'striptags';
 
 class OptionValue extends React.Component {
   constructor(props) {
@@ -8,7 +9,6 @@ class OptionValue extends React.Component {
     this.state = {
       expanded: false
     };
-
   }
 
   onClick = (event) => {
@@ -19,7 +19,7 @@ class OptionValue extends React.Component {
     let name = "";
     let option = this.props.option;
     if (option['description'] && (option['description'] !== option['name'])) {
-      name = <Button bsStyle="link" onClick={this.onClick}>{option['name']}</Button>
+      name = <Button bsStyle="link" onClick={this.onClick}>{striptags(option['name'])}</Button>
     } else {
       name = option['name']
     }

@@ -26,15 +26,8 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-
-  }
-}
-
 const MatchingOptionCodes  = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(OptionCodeList)
 
 export default MatchingOptionCodes

@@ -5,23 +5,3 @@
   font-weight: 300;
 }
 
-.dl-horizontal dt {
-    float: left;
-    overflow: hidden;
-    clear: left;
-    text-align: right;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-  .dl-horizontal dd {
-    margin-left: 60px;
-}
-
-@media (min-width: 768px) {
-  .dl-horizontal dt {
-    width: 160px;
-  }
-  .dl-horizontal dd {
-    margin-left: 180px;
-  }
-}

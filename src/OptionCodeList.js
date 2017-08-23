@@ -3,17 +3,46 @@ import PropTypes from 'prop-types'
 import './OptionCodeList.css'
 import OptionValue from './OptionValue.js'
 
-// from https://stackoverflow.com/questions/35770253/returning-paired-elements-in-react-jsx
-const OptionCodeList = ({ optionCodes }) => (
-  <dl className="OptionCodeList dl-horizontal">
-    {Object.keys(optionCodes).reduce((acc, key, idx) => {
-      return acc.concat([
-          <dt key={`def-${idx}`}>{key}</dt>,
-          <OptionValue key={`term-${idx}`} option={optionCodes[key]} />
-      ]);
-    }, [])}
-  </dl>
-)
+// const OptionCodeList = ({ optionCodes }) => (
+class OptionCodeList extends React.Component {
+
+  render() {
+
+    // organize options by category
+    let categories = {}
+    for (let code in this.props.optionCodes) {
+      let category = "No Info";
+      let option = this.props.optionCodes[code];
+      if (option['category'])
+        category = option['category']
+
+      if (!categories[category])
+        categories[category] = {}
+      categories[category][code] = option;
+    }
+
+    return (
+      <div className="OptionCodeList">
+        {Object.keys(categories).sort().map((key, index) => {
+          return (
+            <div key={index}>
+              <h5>{key}</h5>
+              <dl className="dl-horizontal">
+                {Object.keys(categories[key]).map((code, subindex) => {
+                  return (
+                    <div key={subindex}>
+                      <dt>{code}</dt>
+                      <OptionValue code={code} option={categories[key][code]} />
+                    </div>
+                  )
+                })}
+              </dl>
+            </div>
+          )})}
+      </div>
+    )
+  }
+}
 
 OptionCodeList.propTypes = {
   optionCodes: PropTypes.objectOf(

@@ -2,7 +2,40 @@
   text-align: left;
 }
 
+.OptionCodeList dl.dl-horizontal {
+  padding-left: 20px;
+}
+
+.OptionCodeList .dl-horizontal dt {
+    float: left;
+    overflow: hidden;
+    clear: left;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.OptionCodeList .dl-horizontal dd {
+    margin-left: 60px;
+}
+
+@media (min-width: 768px) {
+  .OptionCodeList {
+    padding-left: 60px;
+  }
+
+  .OptionCodeList .dl-horizontal dt {
+    width: 60px;
+  }
+  .OptionCodeList .dl-horizontal dd {
+    margin-left: 60px;
+  }
+}
+
 .OptionCodeList .btn {
   padding: 0;
 }
 
+.OptionCodeList p {
+  margin: 0;
+}

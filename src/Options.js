@@ -1,26 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Button, FormGroup, FormControl, HelpBlock, ControlLabel, Popover, OverlayTrigger } from 'react-bootstrap';
+import { Button, FormGroup, FormControl, HelpBlock, Popover, OverlayTrigger } from 'react-bootstrap';
 import './Options.css';
 import MatchingOptionCodes from './containers/MatchingOptionCodes.js'
 import { setVehicleData } from './actions'
 
 
 const optionPopover = (
-  <Popover id="popover-trigger-click">
+  <Popover id="optionPopover-trigger-click">
     You can find your link with the option codes by logging in to your "My Tesla" page on the Tesla Motors web site, right clicking on the image of your car, and selecting "Copy Image Address". You can also enter option codes separated by commas.
   </Popover>
 );
 
 const vinPopover = (
-  <Popover id="popover-trigger-click">
+  <Popover id="vinPopover-trigger-click">
     VIN option code lookup only works for cars that are available on <a href="https://www.tesla.com/new" target="_blank" rel="noopener noreferrer">Tesla's new/used inventory site</a>
   </Popover>
 );
 
 function LinkLabel(text, linkText, popover) {
   return (
-    <div>
+    <div className="FormLabel">
       {text}
       <OverlayTrigger trigger="click" placement="top" rootClose overlay={popover}>
         <Button bsStyle="link">{linkText}</Button>
@@ -32,7 +32,7 @@ function LinkLabel(text, linkText, popover) {
 function FieldGroup({ id, label, help, ...props }) {
   return (
     <FormGroup controlId={id}>
-      <ControlLabel>{label}</ControlLabel>
+      {label}
       <FormControl {...props} />
       {help && <HelpBlock>{help}</HelpBlock>}
     </FormGroup>
@@ -135,7 +135,7 @@ class Options extends React.Component {
               placeholder="https://my.teslamotors.com/mytesla/pdf/view-design-pdf?..."
             />
             <FieldGroup
-              id="optionsLink"
+              id="vin"
               type="text"
               label={LinkLabel("or a VIN number", "(details)", vinPopover)}
               onChange={this.handleVINChange}

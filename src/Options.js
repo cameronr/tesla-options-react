@@ -8,7 +8,7 @@ import { setVehicleData } from './actions'
 
 const optionPopover = (
   <Popover id="optionPopover-trigger-click">
-    You can find your link with the option codes by logging in to your "My Tesla" page on the Tesla Motors web site, right clicking on the image of your car, and selecting "Copy Image Address". You can also enter option codes separated by commas.
+    You can find your link with the option codes by logging in to your "My Tesla" page on the Tesla Motors web site and then copying the "View Spec" link. You can also enter option codes separated by commas.
   </Popover>
 );
 

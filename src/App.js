@@ -11,7 +11,7 @@ import { addOptionCode, setVehicleData } from './actions'
 
 
 function fetchCodes(store) {
-  return fetch('pricebook-3.5_MS_US.json')
+  return fetch('pricebooks/pricebook-3.5_MS_US.json')
     .then(response => response.json())
     .then(json => {
       let options = json['tesla']['configSetPrices']['options'];

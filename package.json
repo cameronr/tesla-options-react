@@ -4,9 +4,11 @@
   "private": true,
   "homepage": "http://tesla.whaleface.com",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "isomorphic-fetch": "^2.2.1",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.0.2",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.2",
     "react-dom": "^15.6.1",
@@ -14,7 +16,9 @@
     "react-router-bootstrap": "^0.24.2",
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.11",
-    "redux": "^3.7.2"
+    "react-spinner": "^0.2.7",
+    "redux": "^3.7.2",
+    "url-parse": "^1.1.9"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
@@ -26,6 +30,11 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "bootstrap-sass": "^3.3.7"
+    "bootstrap-sass": "^3.3.7",
+    "eslint": "^4.6.1",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.3.0"
   }
 }

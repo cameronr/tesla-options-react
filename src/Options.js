@@ -1,10 +1,9 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 import { Button, FormGroup, FormControl, HelpBlock, Popover, OverlayTrigger } from 'react-bootstrap';
+import { setVehicleData } from './actions';
+import MatchingOptionCodes from './containers/MatchingOptionCodes.js';
 import './Options.css';
-import MatchingOptionCodes from './containers/MatchingOptionCodes.js'
-import { setVehicleData } from './actions'
-
 
 const optionPopover = (
   <Popover id="optionPopover-trigger-click">
@@ -43,65 +42,55 @@ function extractOptions(vin, text) {
   // find options string
   let searchString = '<img class="section-hero" src="';
   let startPos = text.indexOf(searchString);
-  if (startPos === -1)
+  if (startPos === -1) {
     return null;
+  }
 
   // parse to end of "
-  let endPos = text.indexOf('"', startPos + searchString.length);
-  if (endPos === -1)
+  const endPos = text.indexOf('"', startPos + searchString.length);
+  if (endPos === -1) {
     return null;
+  }
 
-  let url = text.substring(startPos + searchString.length, endPos);
-  if (!url)
+  const url = text.substring(startPos + searchString.length, endPos);
+  if (!url) {
     return null;
+  }
 
-  searchString = "options="
+  searchString = 'options=';
   startPos = url.indexOf(searchString);
-  if (startPos === -1)
+  if (startPos === -1) {
     return null;
+  }
 
-  let options = url.substring(startPos + searchString.length);
-  console.log(options);
+  const options = url.substring(startPos + searchString.length);
+  // console.log(options);
   return options;
 }
 
 function handleVinCodes(vin, dispachFn) {
-  // check used first
-  fetch('https://tesla.whaleface.com/proxy/used/' + vin + '?redirect=no')
+  dispachFn(setVehicleData('', true));
+  // url works for both new and used
+  fetch(`https://tesla.whaleface.com/proxy/used/${vin}?redirect=no`)
     .then(response => response.text())
-    .then(text => {
-      let options = extractOptions(vin, text);
+    .then((text) => {
+      const options = extractOptions(vin, text);
       if (options) {
-        // console.log(options);
-        dispachFn(setVehicleData(options));
-        return null;
+        console.log(options);
+        dispachFn(setVehicleData(options, false));
       }
-      // check new
-      return fetch('https://tesla.whaleface.com/proxy/new/' + vin + '?redirect=no')
-              .then(response => response.text())
-              .then(text => {
-                return extractOptions(vin, text);
-              })
-    })
+      return null;
+    });
 }
 
 
 class Options extends React.Component {
-
-   constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       vehicleData: '',
-      vin: null
+      vin: null,
     };
-  }
-
-  handleVehicleDataChange = (event) => {
-    this.setState({'vehicleData': event.target.value});
-  }
-
-  handleVINChange = (event) => {
-    this.setState({'vin': event.target.value});
   }
 
   onClick = () => {
@@ -112,12 +101,20 @@ class Options extends React.Component {
     }
   }
 
-  _handleKeyPress = (e) => {
+  handleKeyPress = (e) => {
     // prevent submission on form eneter
     if (e.key === 'Enter') {
       e.preventDefault();
       this.onClick();
     }
+  }
+
+  handleVehicleDataChange = (event) => {
+    this.setState({ vehicleData: event.target.value });
+  }
+
+  handleVINChange = (event) => {
+    this.setState({ vin: event.target.value });
   }
 
   render() {
@@ -129,17 +126,17 @@ class Options extends React.Component {
             <FieldGroup
               id="optionsLink"
               type="text"
-              label={LinkLabel("Enter your link", "(how do I find my link?)", optionPopover)}
+              label={LinkLabel('Enter your link', '(how do I find my link?)', optionPopover)}
               onChange={this.handleVehicleDataChange}
-              onKeyPress={this._handleKeyPress}
+              onKeyPress={this.handleKeyPress}
               placeholder="https://my.teslamotors.com/mytesla/pdf/view-design-pdf?..."
             />
             <FieldGroup
               id="vin"
               type="text"
-              label={LinkLabel("or a VIN number", "(details)", vinPopover)}
+              label={LinkLabel('or a VIN number', '(details)', vinPopover)}
               onChange={this.handleVINChange}
-              onKeyPress={this._handleKeyPress}
+              onKeyPress={this.handleKeyPress}
               placeholder="5YJSA1E40FF000000"
             />
             <Button bsStyle="primary" bsSize="large" onClick={this.onClick}>
@@ -154,6 +151,5 @@ class Options extends React.Component {
 }
 
 
-
-export default connect()(Options)
+export default connect()(Options);
 

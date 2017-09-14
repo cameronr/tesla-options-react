@@ -1,24 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import fetch from 'isomorphic-fetch';
+import entries from 'object.entries';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import './App.css';
 import SiteNavBar from './SiteNavBar';
 import Main from './Main';
 import Footer from './Footer';
-import { addOptionCode, setVehicleData } from './actions';
+import { addOptionCode, addOptionCategory, setVehicleData } from './actions';
 
+if (!Object.entries) {
+  entries.shim();
+}
 
-function fetchCodes(store) {
-  return fetch('pricebooks/pricebook-3.5_MS_US.json')
+function fetchCodesForModel(store, model) {
+  fetch(`pricebooks/pricebook_${model}_US.json`)
     .then(response => response.json())
     .then((json) => {
-      const options = json.tesla.configSetPrices.options;
-      for (const key in options) {
-        store.dispatch(addOptionCode(key, options[key]));
-      }
+      Object.entries(json.options).map(([code, option]) => (
+        store.dispatch(addOptionCode(code, option))
+      ));
+      Object.entries(json.categories).map(([category, object]) => (
+        store.dispatch(addOptionCategory(category, object))
+      ));
     });
+}
+
+function fetchCodes(store) {
+  fetchCodesForModel(store, 'x');
+  fetchCodesForModel(store, 's');
 }
 
 class App extends React.Component {

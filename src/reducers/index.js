@@ -14,6 +14,18 @@ const optionCodes = (state = {}, action) => {
   }
 };
 
+const optionCategories = (state = {}, action) => {
+  switch (action.type) {
+    case 'ADD_OPTION_CATEGORY': {
+      const newState = { ...state };
+      newState[action.category] = action.object;
+      return newState;
+    }
+    default:
+      return state;
+  }
+};
+
 const vehicleData = (state = [], action) => {
   // console.log(action);
   switch (action.type) {
@@ -60,6 +72,7 @@ const errorMessage = (state = null, action) => {
 
 const appStore = combineReducers({
   optionCodes,
+  optionCategories,
   vehicleData,
   loading,
   errorMessage,

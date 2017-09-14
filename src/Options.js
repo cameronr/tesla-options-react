@@ -7,13 +7,18 @@ import './Options.css';
 
 const optionPopover = (
   <Popover id="optionPopover-trigger-click">
-    You can find your link with the option codes by logging in to your "My Tesla" page on the Tesla Motors web site and then copying the "View Spec" link. You can also enter option codes separated by commas.
+    You can find your link with the option codes by logging in to your &quot;My Tesla&quot; page on
+    the Tesla Motors web site and then copying the &quot;View Spec&quot; link. You can also enter
+    option codes separated by commas.
   </Popover>
 );
 
 const vinPopover = (
   <Popover id="vinPopover-trigger-click">
-    VIN option code lookup only works for cars that are available on <a href="https://www.tesla.com/new" target="_blank" rel="noopener noreferrer">Tesla's new/used inventory site</a>
+    VIN option code lookup only works for cars that are available on
+    <a href="https://www.tesla.com/new" target="_blank" rel="noopener noreferrer">
+      Tesla&apos;s new/used inventory site
+    </a>
   </Popover>
 );
 
@@ -131,7 +136,7 @@ class Options extends React.Component {
     return (
       <div className="Options">
         <div className="Heading">
-          <h1>Tesla Model S Options Decoder</h1>
+          <h1>Tesla Model S / X Options Decoder</h1>
           <form>
             <FieldGroup
               id="optionsLink"

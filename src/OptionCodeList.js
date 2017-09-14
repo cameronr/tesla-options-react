@@ -12,23 +12,23 @@ import './OptionCodeList.css';
 class OptionCodeList extends React.Component {
   render() {
     // organize options by category
-    const categories = {};
-    for (const code in this.props.optionCodes) {
+    const categories = Object.entries(this.props.optionCodes).reduce((c, [code, option]) => {
       let category = 'No Info';
-      const option = this.props.optionCodes[code];
       if (option.category) {
         category = option.category;
       }
-
-      if (!categories[category]) {
-        categories[category] = {};
+      if (!c[category]) {
+        c[category] = {};
       }
-      categories[category][code] = option;
-    }
+      c[category][code] = option;
+      return c;
+    }, {});
+
+    // console.log(categories);
 
     const options = Object.keys(categories).sort().map(key => (
       <div key={key}>
-        <h5>{key}</h5>
+        <h5>{this.props.optionCategories[key] ? `${this.props.optionCategories[key].name} (${key})` : key}</h5>
         <dl className="dl-horizontal">
           {Object.keys(categories[key]).map(code => (
             <div key={code}>
@@ -55,7 +55,17 @@ OptionCodeList.propTypes = {
       name: PropTypes.string,
     }).isRequired,
   ).isRequired,
+  optionCategories: PropTypes.objectOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+    }).isRequired,
+  ).isRequired,
   loading: PropTypes.bool.isRequired,
+  errorMessage: PropTypes.string,
+};
+
+OptionCodeList.defaultProps = {
+  errorMessage: null,
 };
 
 export default OptionCodeList;

@@ -4,6 +4,12 @@ export const addOptionCode = (code, object) => ({
   object,
 });
 
+export const addOptionCategory = (category, object) => ({
+  type: 'ADD_OPTION_CATEGORY',
+  category,
+  object,
+});
+
 export const setVehicleData = (text, loading = false, errorMessage = null) => ({
   type: 'SET_VEHICLE_DATA',
   text,

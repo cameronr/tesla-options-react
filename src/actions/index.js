@@ -4,10 +4,11 @@ export const addOptionCode = (code, object) => ({
   object,
 });
 
-export const setVehicleData = (text, loading = false) => ({
+export const setVehicleData = (text, loading = false, errorMessage = null) => ({
   type: 'SET_VEHICLE_DATA',
   text,
   loading,
+  errorMessage,
 });
 
 // export const loadOptionCodes = () => {

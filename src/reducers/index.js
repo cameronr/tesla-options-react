@@ -19,6 +19,9 @@ const vehicleData = (state = [], action) => {
   switch (action.type) {
     case 'SET_VEHICLE_DATA': {
       let options;
+      if (action.text === null) {
+        return '';
+      }
       if (action.text.indexOf('?') !== -1) {
         const url = new URL(action.text, null, true);
         if (Object.prototype.hasOwnProperty.call(url.query, 'options')) {
@@ -47,10 +50,19 @@ const loading = (state = false, action) => {
   return action.loading;
 };
 
+const errorMessage = (state = null, action) => {
+  if (action.type !== 'SET_VEHICLE_DATA') {
+    return state;
+  }
+
+  return action.errorMessage;
+};
+
 const appStore = combineReducers({
   optionCodes,
   vehicleData,
   loading,
+  errorMessage,
 });
 
 export default appStore;

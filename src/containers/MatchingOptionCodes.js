@@ -22,6 +22,7 @@ const getMatchingOptionCodes = (optionCodes, vehicleData) => {
 const mapStateToProps = state => ({
   optionCodes: getMatchingOptionCodes(state.optionCodes, state.vehicleData),
   loading: state.loading,
+  errorMessage: state.errorMessage,
 });
 
 

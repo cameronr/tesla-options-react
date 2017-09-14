@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, FormGroup, FormControl, HelpBlock, Popover, OverlayTrigger } from 'react-bootstrap';
 import { setVehicleData } from './actions';
-import MatchingOptionCodes from './containers/MatchingOptionCodes.js';
+import MatchingOptionCodes from './containers/MatchingOptionCodes';
 import './Options.css';
 
 const optionPopover = (
@@ -72,7 +72,12 @@ function handleVinCodes(vin, dispachFn) {
   dispachFn(setVehicleData('', true));
   // url works for both new and used
   fetch(`https://tesla.whaleface.com/proxy/used/${vin}?redirect=no`)
-    .then(response => response.text())
+    .then((response) => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response.text();
+    })
     .then((text) => {
       const options = extractOptions(vin, text);
       if (options) {
@@ -80,6 +85,10 @@ function handleVinCodes(vin, dispachFn) {
         dispachFn(setVehicleData(options, false));
       }
       return null;
+    })
+    .catch((error) => {
+      console.log(`error loading: ${error}`);
+      dispachFn(setVehicleData(null, false, `error loading: ${error}`));
     });
 }
 

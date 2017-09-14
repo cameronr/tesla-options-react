@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Alert } from 'react-bootstrap';
 import Spinner from 'react-spinner';
+import 'react-spinner/react-spinner.css';
+
 import OptionValue from './OptionValue';
 
-import 'react-spinner/react-spinner.css';
 import './OptionCodeList.css';
 
 // const OptionCodeList = ({ optionCodes }) => (
@@ -40,6 +42,7 @@ class OptionCodeList extends React.Component {
 
     return (
       <div className="OptionCodeList">
+        {this.props.errorMessage ? <Alert bsStyle="danger">{this.props.errorMessage}</Alert> : null}
         {this.props.loading ? <Spinner /> : options}
       </div>
     );

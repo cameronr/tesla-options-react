@@ -73,22 +73,23 @@ function handleVinCodes(vin, dispachFn) {
   // url works for both new and used
   fetch(`https://tesla.whaleface.com/proxy/used/${vin}?redirect=no`)
     .then((response) => {
+      // console.log(response);
       if (!response.ok) {
         throw Error(response.statusText);
       }
       return response.text();
     })
     .then((text) => {
+      // console.log(text);
       const options = extractOptions(vin, text);
-      if (options) {
-        console.log(options);
-        dispachFn(setVehicleData(options, false));
+      if (!options) {
+        throw Error('couldn\'t find options');
       }
-      return null;
+      dispachFn(setVehicleData(options, false));
     })
     .catch((error) => {
-      console.log(`error loading: ${error}`);
-      dispachFn(setVehicleData(null, false, `error loading: ${error}`));
+      console.log(`Error loading options: ${error}`);
+      dispachFn(setVehicleData(null, false, `Error loading: ${error}`));
     });
 }
 

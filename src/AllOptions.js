@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
+import AllOptionCodes from './containers/AllOptionCodes';
 
 const AllOptions = () => (
-  <p>all options</p>
-
+  <div>
+    <AllOptionCodes />
+  </div>
 );
 
-export default AllOptions;
+export default connect()(AllOptions);
 

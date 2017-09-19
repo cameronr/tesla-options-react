@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, FormGroup, FormControl, HelpBlock, Popover, OverlayTrigger } from 'react-bootstrap';
+import URL from 'url-parse';
 import { setVehicleData } from './actions';
 import MatchingOptionCodes from './containers/MatchingOptionCodes';
 import './Options.css';
@@ -74,6 +75,7 @@ function extractOptions(vin, text) {
 }
 
 function handleVinCodes(vin, dispachFn) {
+  document.title = `Tesla Options Decoder: ${vin}`;
   dispachFn(setVehicleData('', true));
   // url works for both new and used
   fetch(`https://tesla.whaleface.com/proxy/used/${vin}?redirect=no`)
@@ -106,6 +108,24 @@ class Options extends React.Component {
       vehicleData: '',
       vin: null,
     };
+  }
+
+  componentWillMount() {
+    if (window.location.href.indexOf('?') === -1) {
+      return;
+    }
+
+    const url = new URL(window.location.href, null, true);
+    if (Object.prototype.hasOwnProperty.call(url.query, 'vin')) {
+      this.setState({ vin: url.query.vin });
+      handleVinCodes(url.query.vin, this.props.dispatch);
+    } else {
+      this.props.dispatch(setVehicleData(window.location.href));
+    }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    document.title = `Tesla Options Decoder: ${nextState.vin}`;
   }
 
   onClick = () => {
@@ -149,6 +169,7 @@ class Options extends React.Component {
             <FieldGroup
               id="vin"
               type="text"
+              value={this.state.vin ? this.state.vin : ''}
               label={LinkLabel('or a VIN number', '(details)', vinPopover)}
               onChange={this.handleVINChange}
               onKeyPress={this.handleKeyPress}

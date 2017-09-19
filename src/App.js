@@ -8,7 +8,7 @@ import './App.css';
 import SiteNavBar from './SiteNavBar';
 import Main from './Main';
 import Footer from './Footer';
-import { addOptionCode, addOptionCategory, setVehicleData } from './actions';
+import { addOptionCode, addOptionCategory } from './actions';
 
 if (!Object.entries) {
   entries.shim();
@@ -35,10 +35,6 @@ function fetchCodes(store) {
 class App extends React.Component {
   componentDidMount() {
     fetchCodes(this.context.store);
-
-    if (window.location.href.indexOf('?') !== -1) {
-      this.context.store.dispatch(setVehicleData(window.location.href));
-    }
   }
 
   render() {

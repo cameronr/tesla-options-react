@@ -15,7 +15,7 @@ if (!Object.entries) {
 }
 
 function fetchCodesForModel(store, model) {
-  fetch(`pricebooks/pricebook_${model}_US.json`)
+  return fetch(`pricebooks/pricebook_${model}_US.json`)
     .then(response => response.json())
     .then((json) => {
       Object.entries(json.options).map(([code, option]) => (
@@ -28,8 +28,9 @@ function fetchCodesForModel(store, model) {
 }
 
 function fetchCodes(store) {
-  fetchCodesForModel(store, 'x');
-  fetchCodesForModel(store, 's');
+  fetchCodesForModel(store, 'x').then(() => {
+    fetchCodesForModel(store, 's');
+  });
 }
 
 class App extends React.Component {

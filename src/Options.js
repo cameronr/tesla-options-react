@@ -46,31 +46,31 @@ function FieldGroup({ id, label, help, ...props }) {
 
 function extractOptions(vin, text) {
   // find options string
-  let searchString = '<img class="section-hero" src="';
+  const searchString = '\'configuration\':';
   let startPos = text.indexOf(searchString);
   if (startPos === -1) {
+    // console.log("no key");
     return null;
   }
 
-  // parse to end of "
-  const endPos = text.indexOf('"', startPos + searchString.length);
-  if (endPos === -1) {
-    return null;
-  }
-
-  const url = text.substring(startPos + searchString.length, endPos);
-  if (!url) {
-    return null;
-  }
-
-  searchString = 'options=';
-  startPos = url.indexOf(searchString);
+  // parse to start of '
+  startPos = text.indexOf("'", startPos + searchString.length);
   if (startPos === -1) {
+    // console.log("no start of options");
     return null;
   }
 
-  const options = url.substring(startPos + searchString.length);
-  // console.log(options);
+  const endPos = text.indexOf("'", startPos + 1);
+  if (endPos === -1) {
+    // console.log("no end of options");
+    return null;
+  }
+
+  // console.log(startPos);
+  // console.log(endPos);
+
+  const options = text.substring(startPos + 1, endPos);
+  console.log(options);
   return options;
 }
 

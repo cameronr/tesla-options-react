@@ -3,12 +3,12 @@ import './Footer.css';
 
 class Footer extends Component {
   render() {
-    var link = <a href="https://github.com/cameronr/tesla-options-react">Source available on GitHub</a>;
+    const link = <a href="https://github.com/cameronr/tesla-options-react">Source available on GitHub</a>;
     return (
       <footer className="Footer">
         <div className="container">
           <p className="text-muted text-center">
-            Cameron Ring, 2017 {link}
+            Cameron Ring, 2018 {link}
           </p>
         </div>
       </footer>

@@ -12,6 +12,9 @@
 # ignore css files (since we use scss)
 /src/*.css
 
+# ignore for letsencrypt
+/public/.well-known
+
 # misc
 .DS_Store
 .env.local
@@ -25,3 +28,4 @@ yarn-error.log*
 
 *.swp
 *.swo
+/tmp

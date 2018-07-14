@@ -10,7 +10,6 @@ def fetch_pricebook_data(locale, model):
     if locale != 'US':
         locale_path = '%s/' %(locale)
     url = 'https://www.tesla.com/%smodel%s/design' % (locale_path, model)
-    print url
     html = requests.get(url).text
     for line in html.split('\n'):
         # print line
